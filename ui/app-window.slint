@@ -1,18 +1,42 @@
-import { Button, VerticalBox } from "std-widgets.slint";
+import { VerticalBox } from "std-widgets.slint";
 
 export component AppWindow inherits Window {
-    in-out property <int> counter: 42;
-    callback request-increase-value();
-    VerticalBox {
-        Text {
-            text: "Counter: \{root.counter}";
-        }
+    title: "PM3 Barcode";
+    preferred-width: 520px;
+    preferred-height: 160px;
 
-        Button {
-            text: "Increase value";
-            clicked => {
-                root.request-increase-value();
-            }
+    in-out property <string> scan-type: "";
+    in-out property <string> scan-content: "";
+    in-out property <string> scan-detail: "";
+    in-out property <string> scan-hex: "";
+    in-out property <int> scan-count: 0;
+
+    VerticalBox {
+        padding: 32px;
+        spacing: 4px;
+
+        HorizontalLayout {
+            spacing: 12px;
+            alignment: start;
+            Text { text: "Scans: \{root.scan-count}"; font-size: 12px; color: #888888; }
+            Text { text: root.scan-type; font-size: 12px; color: #4488ff; }
+        }
+        Text {
+            text: root.scan-content;
+            font-size: 18px;
+            font-weight: 700;
+            wrap: word-wrap;
+        }
+        Text {
+            text: root.scan-detail;
+            font-size: 13px;
+            color: #cccccc;
+            wrap: word-wrap;
+        }
+        Text {
+            text: root.scan-hex;
+            font-size: 10px;
+            color: #aaaaaa;
         }
     }
 }

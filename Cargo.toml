@@ -1,12 +1,23 @@
 [package]
-name = "slint-rust-template"
+name = "pm3-barcode"
 version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[features]
+default = ["windowed"]
+windowed = ["slint/backend-winit"]
+framebuffer = ["dep:slint-backend-linuxfb"]
+
 [dependencies]
-slint = "1.14.1"
+serial2 = "0.2.36"
+slint = { version = "1.14.1", default-features = false, features = [
+  "compat-1-2",
+  "std",
+  "renderer-software",
+] }
+slint-backend-linuxfb = { version = "0.1.1", optional = true }
 
 [build-dependencies]
 slint-build = "1.14.1"
